@@ -1,12 +1,10 @@
-import React from 'react'
-import NavBar from '../NavBar'
-
+import React from 'react';
 
 
 function HomePageContent(){
     return(
         <div> 
-            <NavBar/>
+            <h1>Home Page</h1>
         </div>
     
     )
