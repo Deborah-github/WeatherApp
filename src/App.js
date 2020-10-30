@@ -1,11 +1,10 @@
 import React from 'react';
 import './App.css';
-import HomePage from './pages/HomePage';
-import WeatherPage from './WeatherPage';
 import {BrowserRouter as Router,Route} from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
+import LoginPageContent from './contents/LoginPageContent';
 import NavBar from './NavBar';
-
+import WeatherPageContent from './contents/WeatherPageContent';
+import Main  from './contents/Main';
 function App() {
   return (
     <div>
@@ -13,9 +12,9 @@ function App() {
       <Router>
       <NavBar/>
 
-      <Route path= '/'  component= {HomePage}exact/>
-      <Route path= '/login' component= {LoginPage}/>
-      <Route path= '/weather' component={WeatherPage}/>
+      <Route path= '/' component={WeatherPageContent}exact/>
+      <Route path= '/login' component= {LoginPageContent}/>
+      <Route path= '/Main'  component= {Main}/>
 
       </Router>
      

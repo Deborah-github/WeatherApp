@@ -1,0 +1,18 @@
+li { 
+    display: inline ;
+    background-color: grey;
+    color :purple
+}
+
+
+ul {
+    padding: 15px 20px;
+    text-decoration: none;
+    padding-bottom: 0px
+
+}
+
+li a:hover{
+    background-color: white;
+}
+

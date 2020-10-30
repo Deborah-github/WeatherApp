@@ -1,27 +1,86 @@
 
-import React from 'react';
+import React,{useState,useEffect} from 'react';
+import axios from "axios";
 
+function WeatherPageContent() {
 
-function WeatherPageContent(){
+    const [dataloaded, setDataLoaded] = useState(false);
+    const [city, setCity] = useState("");
+    const [weatherinfo, setWeatherInfo] = useState(null);
+    const [searchLocation, setSearchLocation] = useState("Accra");
+
+    function CityInput(event) {
+        setCity(event.target.value);
+    }
+
+    useEffect(() => {
+        if (weatherinfo) {
+            setDataLoaded(true);
+        }
+    }, [weatherinfo]);
+
+    useEffect(() => {
+        ApiCall();
+    }, [searchLocation]);
+
+    function ApiCall() {
+        axios.get(
+            `http://api.weatherstack.com/current?access_key=9421e536832c102d4f68078a4ac5b167&query=${searchLocation}`
+            
+            
+        )
+            .then((res) => {
+                if (res.status === 200 && !res.data.error) {
+                    console.log(res);
+                    setWeatherInfo(res.data);
+
+                } else {
+                    console.log(res);
+                }
+            })
+            .catch((err) => console.error(err));
+    }
+    function HandleSearch() {
+        setSearchLocation(city);
+    }
     return (
-        <div>
+        <div className="App">
+            <div className="Left">
+                <div className="Homepage">
 
-         <h1>ACCRA </h1>
-         <h3>SUNNY </h3>
-         <h2>26<sup>0</sup>C</h2>
-        
-         <input type='search' placeholder='type your city e.g Accra'></input>
-        <input type='submit'></input>
+                    <h1> WEATHER APP </h1>
+                    <p>{dataloaded ? weatherinfo.request.query : ""}</p>
+                    <p>{dataloaded ? weatherinfo.location.localtime : ""}</p>
 
-        <h1>09:00</h1>
-        <h2>SATURDAY,17,OCTOBER 2020</h2>
-       
+                    <div className="weather-logo">
+                        <img
+                            src={
+                                dataloaded
+                                    ? weatherinfo.current.weather_icons[0]
+                                    : ""
+                            }
+                            alt=" "
+                        />
+                        <h2>
+                            {dataloaded ? weatherinfo.current.temperature : ""}°
+                        Celcius
+                    </h2>
+                    </div>
+                    <input
+                        type="search"
+                        value={city}
+                        onChange={CityInput}brwa
+                        className="form-control"
+                        placeholder="Enter your city..."
+                    />
+                    <input
+                        type="submit"
+                        onClick={HandleSearch}
+                        className="search-weather-btn btn btn-success "
+                    />
+                </div>
+            </div>
         </div>
-    )
+    );
 }
-
-
-
-
-
 export default WeatherPageContent;

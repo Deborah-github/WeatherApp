@@ -1,16 +1,8 @@
 import React from 'react';
 
-
-function HomePageContent(){
+function HomePageContent() {
     return(
-        <div> 
-            <h1>Home Page</h1>
-        </div>
-    
-    )
-    
+        <p> I like sunny weather</p>
+    );
 }
-
-
-export default HomePageContent
-
+export default HomePageContent;
